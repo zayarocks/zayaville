@@ -371,7 +371,7 @@ Update Beefy and reclone. His boots should now be beefy.
 
 Now we can give him a little bit of bling.
 ```c
-/* items/beefy_ring.c */
+/* items/beefy_ring.c a*/
 inherit ARMOUR;
 
 void setup()
@@ -396,7 +396,51 @@ void setup()
 
 
 ### An Inside Job
+Let's head inside by adding some indoor rooms. This example creates a little shop. 
+
+```c
+/* rooms/mysterious_room.c */
+inherit INDOOR_ROOM;
+
+void setup()
+{
+  set_area("zayaville");
+
+  set_brief("Mysterious Room");
+
+  set_long(
+    "This is a mysterious room. The oppressive atmosphere hints "
+    "mysteriously at some deeper mystery."
+  );
+
+  add_item(
+    "mystery",
+    "You cannot see the mystery, which only makes it more mysterious."
+  );
+
+  add_item(
+    "darkness",
+    "The darkness seems almost independent of the room's actual lighting."
+  );
+
+  set_listen(
+    "The room emits a faint and deeply mysterious hum."
+  );
+
+  set_exits(([
+    "south" : "market_northwest",
+  ]));
+}
 ```
+
+Add a matching exit to ``market_northwest.c``.
+```c
+set_exits(([
+  "south"     : "market_southwest",
+  "east"      : "market_northeast",
+  "southeast" : "market_southeast",
+  "north"     : "mysterious_room",
+]));
 ```
 
 ### Dysfunctional Behavior

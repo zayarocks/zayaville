@@ -12,11 +12,11 @@ void setup()
 	  "south and east."
 	);
 
-  set_exits(([
-	  "north"     : "market_northwest",
-	  "east"      : "market_southeast",
-	  "west"      : "street_03",
-	  "northeast" : "market_northeast",
+	set_exits(([
+	  "south"     : "market_southwest",
+	  "east"      : "market_northeast",
+	  "southeast" : "market_southeast",
+	  "north"     : "mysterious_room",
 	]));
 
 }
