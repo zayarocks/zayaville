@@ -64,8 +64,8 @@ void setup()
     "say No, please no. I beg you!"
   );
 
-  set_wearing("/domains/std/armour/fullplate");
   set_wielding("/domains/std/weapon/sword");
+	set_wearing("/domains/std/armour/chainmail");
 	set_wearing("../items/beefy_boots");
 
 
