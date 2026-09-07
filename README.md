@@ -198,7 +198,7 @@ void setup()
 ```
 
 To make Captain Beefy magically appear:
-```
+```bash
 update chars/*
 clone chars/captain_beefy.c
 ```
@@ -256,14 +256,15 @@ set_objects(([
 ```
 
 Take a look at this handsome creature:
-```
+```bash
 look at beefy
 look at beefy's sword
 inventory of beefy
 ```
 
-Now let's make him fiesty:
-```
+Now let's make him fiesty!
+```c
+/* chars/captain_beefy.c */
 varargs void attacked_by(object attacker, int take_a_swing)
 {
   string *reactions = ({
