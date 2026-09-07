@@ -7,13 +7,15 @@ All files reside in the domain folder located at ``lib/domain/zayaville``. If yo
 This guide assumes a certain proficiency at Unix administration and programming in C. However, the book itself 
 
 ### My First Room
-Edit rooms/street_01.c.
 
-```
-inherit OUTDOOR_ROOM;
+### rooms/street_01.c
+Edit rooms/street_01.c. The following code demonstrates how to set the initial descriptive text for the room, as well as the weather and any items. 
+*The active working directory should be your personal domain folder.*
 
-void setup()
+```c
+void setup() 
 {
+    /* Descriptive room text */
     set_area("zayaville");
 
     set_brief("Simple Village Road");
@@ -25,15 +27,65 @@ void setup()
     );
 
     set_weather(1);
+
+    /* Add any "discoverable" items here. */
+    add_item(
+        "village",
+        "The village is simple, but beautiful because of it."
+    );
+
+    add_item(
+        "road",
+        "The road passes beneath you on its way toward the village."
+    );
+
+    /* Navigate to a second room */
+    set_exits(([
+    "northeast" : "street_02",
+    ]));
+
 }
 ```
+
+### rooms/street_02.c
+This second room is needed to make the exit functional. 
+```c
+inherit OUTDOOR_ROOM;
+
+void setup()
+{
+  set_area("zayaville");
+
+  set_brief("Simple Village Road");
+
+  set_long(
+    "This is a little way along the path to the village of "
+    "Zayaville. The path continues northeast toward the rickety "
+    "buildings of the market square. To the southwest, the path "
+    "winds away from what passes as civilization here."
+  );
+
+  set_weather(1);
+
+  set_exits(([
+    "southwest" : "street_01",
+  ]));
+}
+```
+
 
 To see the updated room, run the following commands on the MUD:
 ```bash
 update rooms/street_01.c
 goto rooms/street_01.c
+look
+look at village
+look at road
 ```
-*Make sure that you are in the proper working directory.*
+
+Not all nouns from the description need to be actual items in the room. However, doing so certainly helps with immersion. 
+
+
 
 
 ### My First Area
