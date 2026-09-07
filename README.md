@@ -1,9 +1,11 @@
 # Zayaville
-Zayaville is a very basic mudlib running on FluffOS. hHighly inspired by the LPC for Dummies books by Drakkos. In fact, all of the code is more or less identical, just with the word "Zaya" all over it. (Clever, isn't it?)
+Zayaville is a very basic mudlib running on FluffOS. Highly inspired by the LPC for Dummies books by Drakkos. In fact, all of the code is more or less identical, just with the word "Zaya" all over it. (Clever, isn't it?)
 
 All files reside in the domain folder located at ``lib/domain/zayaville``. If you don't want to live in Zayaville, make whatever 'ville you'd like. 
 
-## Book 1
+The code from the book has been modified to work with LIMA mudlib, skipping over the Discworld-specific items entirely.
+
+## LPC for Dummies: Book 1
 This guide assumes a certain proficiency at Unix administration and programming in C. However, the book itself 
 
 ### My First (and Second) Room(s)
@@ -240,7 +242,7 @@ add_sub_pattern(
 
 Update Beefy again. He will now respond to the following words: "hello", "hi", kill", "murder".
 
-Now we can dress him up:
+Now we can dress him up and give him a couple objects:
 ```c
 set_wearing("/domains/std/armour/fullplate");
 set_wielding("/domains/std/weapon/sword");
@@ -251,18 +253,68 @@ set_objects(([
 ]));
 ```
 
-### Hooking Up
+Take a look at this handsome creature:
 ```
+look at beefy
+look at beefy's sword
+inventory of beefy
+```
+
+Now let's make him fiesty:
+```
+varargs void attacked_by(object attacker, int take_a_swing)
+{
+  string *reactions = ({
+    "$N $vcry to $t, \"Oh please, not again!\"",
+    "$N $vshout at $t, \"I don't have medical insurance!\"",
+    "$N $vplead with $t for mercy.",
+  });
+
+  if (!query_target())
+    targetted_action(choice(reactions), attacker);
+
+  ::attacked_by(attacker, take_a_swing);
+}
+```
+Place this code after the ``setup`` function. Update, clone, and 'kill' to see Beefy's reaction.
+
+
+### Hooking Up
+Adding an NPC to a room onload is similar to adding any other object:
+```
+set_objects(([
+  "../chars/captain_beefy" : 1,
+]));
 ```
 
 ### Back To The Beginning
-```
+Let's expand the marketplace object in ``street_03.c``` to include additional senses. Replace the generic ``add_item`` code with the following.
+
+```c
+add_item(
+  "marketplace", "market",
+  ([
+    "look" :
+      "Four cobblestone sections form Zayaville's busy marketplace. "
+      "Merchants and villagers move between the surrounding shops.\n",
+
+    "listen" :
+      "You hear merchants advertising their goods and villagers "
+      "haggling over prices.\n",
+
+    "smell" :
+      "The air carries the mixed scents of food, animals, and smoke.\n",
+
+    "search" :
+      "You search around the marketplace but find nothing unusual.\n",
+  ])
+);
 ```
 
 ### Now That We're An Item
 ```
 ```
-
+localStorage.clear()
 ### An Inside Job
 ```
 ```
