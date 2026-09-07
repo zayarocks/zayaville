@@ -3,13 +3,14 @@ inherit OUTDOOR_ROOM;
 void setup()
 {
   set_area("zayaville");
-	set_brief("Zayaville Marketplace");
 
-  set_long(
-    "A broad cobblestone marketplace opens here beneath the sky. "
-    "Weathered buildings surround the square, their shopfronts facing "
-    "an open space where merchants and villagers gather."
-  );
+  set_brief("Northwest Corner of Zayaville Marketplace");
+
+	set_long(
+	  "The northwest corner of Zayaville's cobblestone marketplace lies "
+	  "between a row of weathered buildings. The marketplace continues "
+	  "south and east."
+	);
 
   set_exits(([
 	  "north"     : "market_northwest",

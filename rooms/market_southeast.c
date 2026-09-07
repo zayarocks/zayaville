@@ -4,13 +4,13 @@ void setup()
 {
   set_area("zayaville");
 
-  set_brief("Zayaville Marketplace");
+	set_brief("Southeast Corner of Zayaville Marketplace");
 
-  set_long(
-    "A broad cobblestone marketplace opens here beneath the sky. "
-    "Weathered buildings surround the square, their shopfronts facing "
-    "an open space where merchants and villagers gather."
-  );
+	set_long(
+	  "The southeast corner of Zayaville's cobblestone marketplace lies "
+	  "here. Weathered shopfronts face the square, which continues north "
+	  "and west."
+	);
 
   set_weather(1);
 
