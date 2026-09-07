@@ -39,8 +39,21 @@ void setup()
 	);
 
 	add_item(
-		"cobblestones",
-		"The cobblestones have been worn smooth by generations of traffic."
+		"cobblestones", "stones", "road",
+		([
+			"look" :
+				"The old cobblestones have been worn smooth by years of carts, "
+				"boots, and horses.\n",
+
+			"get" :
+				"The cobblestones are firmly embedded in the road.\n",
+
+			"pull" :
+				"You tug at one of the stones, but it refuses to move.\n",
+
+			"search" :
+				"You search between the cobblestones but find only dirt.\n",
+		])
 	);
 
 	add_item(

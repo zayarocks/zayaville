@@ -288,7 +288,7 @@ set_objects(([
 ```
 
 ### Back To The Beginning
-Let's expand the marketplace object in ``street_03.c``` to include additional senses. Replace the generic ``add_item`` code with the following.
+Let's expand the marketplace object in ``street_03.c``` to make it more interactive. Replace the generic ``add_item`` code with the following.
 
 ```c
 add_item(
@@ -307,6 +307,27 @@ add_item(
 
     "search" :
       "You search around the marketplace but find nothing unusual.\n",
+  ])
+);
+```
+
+We can do the cobblestones too: 
+```c
+add_item(
+  "cobblestones", "stones", "road",
+  ([
+    "look" :
+      "The old cobblestones have been worn smooth by years of carts, "
+      "boots, and horses.\n",
+
+    "get" :
+      "The cobblestones are firmly embedded in the road.\n",
+
+    "pull" :
+      "You tug at one of the stones, but it refuses to move.\n",
+
+    "search" :
+      "You search between the cobblestones but find only dirt.\n",
   ])
 );
 ```
