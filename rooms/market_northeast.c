@@ -6,4 +6,10 @@ void setup()
   set_brief("Skeleton Room");
   set_long("This is a skeleton room.");
   set_weather(1);
+
+	set_exits(([
+	  "south"     : "market_southeast",
+	  "west"      : "market_northwest",
+	  "southwest" : "market_southwest",
+	]));
 }
