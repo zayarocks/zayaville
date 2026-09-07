@@ -66,7 +66,9 @@ void setup()
 
   set_wearing("/domains/std/armour/fullplate");
   set_wielding("/domains/std/weapon/sword");
+	
 	set_wearing("../items/beefy_boots");
+	set_wearing("../items/beefy_ring");
 
 
   set_objects(([
