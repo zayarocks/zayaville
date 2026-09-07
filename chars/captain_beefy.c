@@ -1,5 +1,8 @@
 inherit ADVERSARY;
 
+// idle 
+inherit M_ACTIONS;
+
 void setup()
 {
   ::setup();
