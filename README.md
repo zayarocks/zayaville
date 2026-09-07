@@ -283,8 +283,8 @@ Place this code after the ``setup`` function. Update, clone, and 'kill' to see B
 
 
 ### Hooking Up
-Adding an NPC to a room onload is similar to adding any other object:
-```
+Adding an NPC to a room onload is similar to adding any other object. Add the following code to any room to place Beefy there automatically.
+```c
 set_objects(([
   "../chars/captain_beefy" : 1,
 ]));
