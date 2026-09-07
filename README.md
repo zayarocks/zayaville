@@ -481,6 +481,43 @@ set_objects(([
 ]));
 ```
 
+Now we can add our shop, Stabby Joe's Emporium of Wonder. Don't worry, we'll make the shopkeeper next. 
+```
+/* file: rooms/stabby_joe.c */
+inherit INDOOR_ROOM;
+
+void setup()
+{
+  set_area("zayaville");
+
+  set_brief("Stabby Joe's Emporium of Wonder");
+
+  set_long(
+    "This is Stabby Joe's Emporium of Wonder, where he sells "
+    "wonderful things. He also stabs people."
+  );
+
+  add_item(
+    "emporium", "shop",
+    "The emporium is packed with strange and wonderful merchandise."
+  );
+
+  set_exits(([
+    "south" : "market_northeast",
+  ]));
+}
+```
+
+Update ``market_northeast.c`` exits to point to Stabby's: 
+```c
+set_exits(([
+  "south"     : "market_southeast",
+  "west"      : "market_northwest",
+  "southwest" : "market_southwest",
+  "north"     : "stabby_joe",
+]));
+```
+
 ### Dysfunctional Behavior
 ```
 ```
