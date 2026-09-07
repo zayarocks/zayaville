@@ -199,12 +199,12 @@ update chars/*
 clone chars/captain_beefy.c
 ```
 
-To get him to talk back, add this to the top: 
+To get him to talk back, add this to the top...
 ```c
 inherit M_TRIGGERS;
 ```
 
-And this somewhere in the ``setup`` function.
+...and this somewhere in the ``setup`` function.
 ```c
 add_pattern(
   "%s says: %s.",
@@ -238,7 +238,18 @@ add_sub_pattern(
 );
 ```
 
-Update Beefy again. He will now respond to the following words: hello", "hi", kill", "murder".
+Update Beefy again. He will now respond to the following words: "hello", "hi", kill", "murder".
+
+Now we can dress him up:
+```c
+set_wearing("/domains/std/armour/fullplate");
+set_wielding("/domains/std/weapon/sword");
+
+set_objects(([
+  "/domains/std/consumable/bandage" : 2,
+  "/domains/std/consumable/peanuts" : 1,
+]));
+```
 
 ### Hooking Up
 ```
