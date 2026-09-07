@@ -14,6 +14,11 @@ void setup()
 
 	set_weather(1);
 
+	set_listen(
+		"You hear merchants advertising their goods and villagers "
+		"haggling over prices."
+	);
+
 	add_item(
 		"road",
 		"The narrow village road widens as it approaches the marketplace."
@@ -25,10 +30,6 @@ void setup()
 			"look" :
 				"Four cobblestone sections form Zayaville's busy marketplace. "
 				"Merchants and villagers move between the surrounding shops.\n",
-
-			"listen" :
-				"You hear merchants advertising their goods and villagers "
-				"haggling over prices.\n",
 
 			"smell" :
 				"The air carries the mixed scents of food, animals, and smoke.\n",
