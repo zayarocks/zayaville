@@ -15,34 +15,34 @@ Edit rooms/street_01.c. The following code demonstrates how to set the initial d
 ```c
 void setup() 
 {
-    /* Descriptive room text */
-    set_area("zayaville");
+	/* Descriptive room text */
+	set_area("zayaville");
 
-    set_brief("Simple Village Road");
+	set_brief("Simple Village Road");
 
-    set_long(
-        "This is a simple road leading to a simple village. There is "
-        "very little of any excitement about it, except that it represents "
-        "your first steps toward becoming a creator!"
-    );
+	set_long(
+		"This is a simple road leading to a simple village. There is "
+		"very little of any excitement about it, except that it represents "
+		"your first steps toward becoming a creator!"
+	);
 
-    set_weather(1);
+	set_weather(1);
 
-    /* Add any "discoverable" items here. */
-    add_item(
-        "village",
-        "The village is simple, but beautiful because of it."
-    );
+	/* Add any "discoverable" items here. */
+	add_item(
+		"village",
+		"The village is simple, but beautiful because of it."
+	);
 
-    add_item(
-        "road",
-        "The road passes beneath you on its way toward the village."
-    );
+	add_item(
+		"road",
+		"The road passes beneath you on its way toward the village."
+	);
 
-    /* Navigate to a second room */
-    set_exits(([
-    "northeast" : "street_02",
-    ]));
+	/* Navigate to a second room */
+	set_exits(([
+	"northeast" : "street_02",
+	]));
 
 }
 ```
@@ -58,16 +58,16 @@ void setup()
   set_brief("Simple Village Road");
 
   set_long(
-    "This is a little way along the path to the village of "
-    "Zayaville. The path continues northeast toward the rickety "
-    "buildings of the market square. To the southwest, the path "
-    "winds away from what passes as civilization here."
+	"This is a little way along the path to the village of "
+	"Zayaville. The path continues northeast toward the rickety "
+	"buildings of the market square. To the southwest, the path "
+	"winds away from what passes as civilization here."
   );
 
   set_weather(1);
 
   set_exits(([
-    "southwest" : "street_01",
+	"southwest" : "street_01",
   ]));
 }
 ```
@@ -152,8 +152,93 @@ At this point you should have a completely navigatable (albeit small) MUD area!
 
 ### Building The Perfect Beast
 
+Here is the code for our first NPC:
+```c
+// file: chars/captain_beefy.c
+inherit ADVERSARY;
+
+// idle 
+inherit M_ACTIONS;
+
+void setup()
+{
+	::setup();
+
+	set_name("beefy");
+	add_id("captain");
+
+	set_proper_name("Captain Beefy");
+	set_in_room_desc("Captain Beefy stands here, looking nervous.");
+
+	set_long(
+		"Captain Beefy is a former military officer who retired after being "
+		"stabbed in the face by a marauding adventurer. He now lives in "
+		"Zayaville, hoping to enjoy a quiet life before someone murders him "
+		"for his shoes."
+	);
+
+	set_gender(1);
+	set_level(10);
+
+	set_actions(
+		10,
+		({
+			"say Please don't hurt me.",
+			"cower",
+			"say Here come the drums!",
+			"stare",
+		})
+	);
+	
+}
 ```
+
+To make Captain Beefy magically appear:
 ```
+update chars/*
+clone chars/captain_beefy.c
+```
+
+To get him to talk back, add this to the top: 
+```c
+inherit M_TRIGGERS;
+```
+
+And this somewhere in the ``setup`` function.
+```c
+add_pattern(
+  "%s says: %s.",
+  (: $2 ? $2 : 0 :),
+  0,
+  "beefy_speech"
+);
+
+add_sub_pattern(
+  "beefy_speech",
+  "%shello%s",
+  "say Er, hello. Please don't kill me."
+);
+
+add_sub_pattern(
+  "beefy_speech",
+  "%shi%s",
+  "say Er, hello. Please don't kill me."
+);
+
+add_sub_pattern(
+  "beefy_speech",
+  "%skill%s",
+  "say No, please no. I beg you!"
+);
+
+add_sub_pattern(
+  "beefy_speech",
+  "%smurder%s",
+  "say No, please no. I beg you!"
+);
+```
+
+Update Beefy again. He will now respond to the following words: hello", "hi", kill", "murder".
 
 ### Hooking Up
 ```

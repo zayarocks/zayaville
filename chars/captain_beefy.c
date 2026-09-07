@@ -1,7 +1,6 @@
 inherit ADVERSARY;
-
-// idle 
 inherit M_ACTIONS;
+inherit M_TRIGGERS;
 
 void setup()
 {
@@ -32,5 +31,38 @@ void setup()
 			"stare",
 		})
 	);
+
+	// Conversational triggers
+		add_pattern(
+	  "%s says: %s.",
+	  (: $2 ? $2 : 0 :),
+	  0,
+	  "beefy_speech"
+	);
+
+	add_sub_pattern(
+	  "beefy_speech",
+	  "%shello%s",
+	  "say Er, hello. Please don't kill me."
+	);
+
+	add_sub_pattern(
+	  "beefy_speech",
+	  "%shi%s",
+	  "say Er, hello. Please don't kill me."
+	);
+
+	add_sub_pattern(
+	  "beefy_speech",
+	  "%skill%s",
+	  "say No, please no. I beg you!"
+	);
+
+	add_sub_pattern(
+	  "beefy_speech",
+	  "%smurder%s",
+	  "say No, please no. I beg you!"
+	);
+
 	
 }
