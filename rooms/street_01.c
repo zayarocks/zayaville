@@ -1,3 +1,5 @@
+inherit OUTDOOR_ROOM;
+
 void setup() 
 {
 	/* Descriptive room text */
