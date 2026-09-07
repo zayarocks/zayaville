@@ -14,9 +14,15 @@ void setup()
 
   set_weather(1);
 
+  // Add an NPC!
+  set_objects(([
+  "../chars/captain_beefy" : 1,
+]));
+
 	set_exits(([
 	  "south"     : "market_southeast",
 	  "west"      : "market_northwest",
 	  "southwest" : "market_southwest",
 	]));
+
 }
