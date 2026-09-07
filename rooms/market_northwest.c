@@ -16,7 +16,10 @@ void setup()
 	  "south"     : "market_southwest",
 	  "east"      : "market_northeast",
 	  "southeast" : "market_southeast",
-	  "north"     : "mysterious_room",
+	]));
+
+	set_objects(([
+	  "../items/mysterious_door" : ({ "north", "mysterious_room" }),
 	]));
 
 }

@@ -443,6 +443,42 @@ set_exits(([
 ]));
 ```
 
+Update the rooms, then enter the northwestern marketplace and travel north until you hit the ``mysterious_room``. 
+```c
+/* items/mysterious_door.c */
+/* file: items/mysterious_door.c */
+inherit DOOR;
+
+void setup(string direction, string destination)
+{
+  set_id("door");
+  set_adj("mysterious", "wooden");
+
+  set_long(
+    "The mysterious wooden door hints at riches and mystery within."
+  );
+
+  set_sibling_ident("zayaville mysterious door");
+  set_door_direction(direction);
+  set_door_destination(destination);
+  set_closed(1);
+}
+```
+
+Now let's add a mysterious door to our mysterious room. Remove the north exit from ``rooms/market_northwest.c`` and add the new door item instead.
+```
+set_objects(([
+  "../items/mysterious_door" : ({ "north", "mysterious_room" }),
+]));
+```
+
+Here's the door code to add to ``mysterious_room``. It replaces the ``set_exits`` function.
+```
+set_objects(([
+  "../items/mysterious_door" : ({ "south", "market_northwest" }),
+]));
+```
+
 ### Dysfunctional Behavior
 ```
 ```
