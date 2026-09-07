@@ -5,6 +5,8 @@ All files reside in the domain folder located at ``lib/domain/zayaville``. If yo
 
 The code from the book has been modified to work with LIMA mudlib, skipping over the Discworld-specific items entirely.
 
+**NOTE:** There is no reason to copy/paste the below code. It's only for reference. The repo contains the complete code for Zayaville.
+
 ## LPC for Dummies: Book 1
 This guide assumes a certain proficiency at Unix administration and programming in C. However, the book itself 
 
@@ -297,11 +299,6 @@ add_item(
     "look" :
       "Four cobblestone sections form Zayaville's busy marketplace. "
       "Merchants and villagers move between the surrounding shops.\n",
-
-    "listen" :
-      "You hear merchants advertising their goods and villagers "
-      "haggling over prices.\n",
-
     "smell" :
       "The air carries the mixed scents of food, animals, and smoke.\n",
 
@@ -332,10 +329,46 @@ add_item(
 );
 ```
 
+The following is LIMA's convention for setting a sound in a room. It replaces the 'listen' embedded into the ``add_item`` function. 
+```c
+set_listen(
+  "You hear merchants advertising their goods and villagers "
+  "haggling over prices."
+);
+```
+
 ### Now That We're An Item
+We are not limited to the default items. We can expand them into our own custom items. 
+```c
+/* file: items/beefy_boots.c */
+inherit ARMOUR;
+
+void setup()
+{
+  set_id("boots");
+  set_adj("pair of", "beefy", "leather");
+
+  set_long(
+    "This is a pair of extremely beefy leather boots. "
+    "A person would need to be very beefy indeed to wear them."
+  );
+
+  set_slot("feet");
+  set_armour_class(3);
+  set_mass(0.3);
+  set_value(200);
+
+  set_wearmsg("$N $vput on a pair of beefy leather boots.");
+  set_removemsg("$N $vtake off a pair of beefy leather boots.");
+}
 ```
+
+Go back to Captain Beefy and add the new item: 
+```c
+set_wearing("../items/beefy_boots");
 ```
-localStorage.clear()
+Update Beefy and reclone. His boots should now be beefy.
+
 ### An Inside Job
 ```
 ```
