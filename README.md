@@ -1,2 +1,2 @@
 # zayaville
-tutorial MUD for LPC / FluffOS 
+practice MUD for LPC / FluffOS 
