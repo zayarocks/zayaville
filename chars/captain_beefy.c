@@ -73,7 +73,7 @@ void setup()
   ]));
 }
 
-void under_attack_by(object attacker)
+varargs void attacked_by(object attacker, int take_a_swing)
 {
   string *reactions = ({
     "$N $vcry to $t, \"Oh please, not again!\"",
@@ -81,5 +81,8 @@ void under_attack_by(object attacker)
     "$N $vplead with $t for mercy.",
   });
 
-  targetted_action(choice(reactions), attacker);
+  if (!query_target())
+    targetted_action(choice(reactions), attacker);
+
+  ::attacked_by(attacker, take_a_swing);
 }
