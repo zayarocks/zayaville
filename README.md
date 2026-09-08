@@ -569,23 +569,17 @@ void setup()
     })
   );
 
-  add_pattern(
+	add_pattern(
 	  "%s says: %s.",
-	  (: $2 ? $2 : 0 :),
-	  0,
-	  "joe_speech"
-	);
-
-	add_sub_pattern(
-	  "joe_speech",
-	  "%sslicey%s",
-	  "say Don't you mention my cousin!"
-	);
-
-	add_sub_pattern(
-	  "joe_speech",
-	  "%spete%s",
-	  "say Don't you mention my cousin!"
+	  (:
+	    $2 &&
+	    (
+	      strsrch(lower_case($2), "slicey") != -1 ||
+	      strsrch(lower_case($2), "pete") != -1
+	    )
+	      ? "say Don't you mention my cousin!"
+	      : 0
+	  :)
 	);
 
   set_currency_type("gold");
@@ -593,8 +587,9 @@ void setup()
   set_will_buy(0);
 
   set_sell(([
-    "/domains/std/weapon/longsword" : 3,
-  ]));
+	  "^std/weapon/sword"               : 3,
+	  __DIR__ "../items/mysterious_key" : 1,
+	]));
 }
 ```
 
@@ -632,16 +627,6 @@ void setup()
   set_mass(0.1);
   set_value(25);
 }
-```
-
-
-Then update Joe to actually sell it:
-```c
-/* file: chars/joe.c */
-set_sell(([
-  "^std/weapon/sword"               : 3,
-  __DIR__ "../items/mysterious_key" : 1,
-]));
 ```
 
 Buy the key and use it:
