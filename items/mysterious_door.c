@@ -19,3 +19,10 @@ void setup(string direction, string destination)
 	set_flag(ATTACHED);
 
 }
+
+/* makes the door visible when closed */
+void do_on_close()
+{
+  ::do_on_close();
+  set_hidden(0);
+}

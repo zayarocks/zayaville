@@ -612,6 +612,14 @@ set_sell(([
 ]));
 ```
 
+Buy the key and use it:
+```bash
+buy key from joe
+unlock door with key
+open door
+north
+```
+
 
 ### Dysfunctional Behavior
 ```
