@@ -36,21 +36,15 @@ void setup()
 
 	add_pattern(
 	  "%s says: %s.",
-	  (: $2 ? $2 : 0 :),
-	  0,
-	  "joe_speech"
-	);
-
-	add_sub_pattern(
-	  "joe_speech",
-	  "%sslicey%s",
-	  "say Don't you mention my cousin!"
-	);
-
-	add_sub_pattern(
-	  "joe_speech",
-	  "%spete%s",
-	  "say Don't you mention my cousin!"
+	  (:
+	    $2 &&
+	    (
+	      strsrch(lower_case($2), "slicey") != -1 ||
+	      strsrch(lower_case($2), "pete") != -1
+	    )
+	      ? "say Don't you mention my cousin!"
+	      : 0
+	  :)
 	);
 
 	set_currency_type("gold");
