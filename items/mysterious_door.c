@@ -20,9 +20,8 @@ void setup(string direction, string destination)
 
 }
 
-/* makes the door visible when closed */
-void do_on_close()
+/* Keep the door visible in every state. */
+int query_hidden()
 {
-  ::do_on_close();
-  set_hidden(0);
+  return 0;
 }
