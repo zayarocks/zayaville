@@ -13,11 +13,17 @@ void setup(string direction, string destination)
 	set_sibling_ident("zayaville mysterious door");
 	set_door_direction(direction);
 	set_door_destination(destination);
-	set_closed(1);
-	set_locked("mysterious room key");
 
 	set_flag(ATTACHED);
 
+}
+
+varargs void on_clone(mixed args...)
+{
+  ::on_clone(args...);
+
+  set_closed(1);
+  set_locked("mysterious room key");
 }
 
 /* Keep the door visible in every state. */
