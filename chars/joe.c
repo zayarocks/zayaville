@@ -38,6 +38,7 @@ void setup()
 	set_will_buy(0);
 
 	set_sell(([
-		"/domains/std/weapon/longsword" : 3,
+		"^std/weapon/sword"               : 3,
+		__DIR__ "../items/mysterious_key" : 1,
 	]));
 }

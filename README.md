@@ -573,6 +573,46 @@ set_objects(([
 ]));
 ```
 
+Ask Joe about some of his products, or even buy something. 
+``bash
+ask joe about swords
+ask joe about sword
+buy sword from joe
+``
+
+We can also make him sell a ``mysterious_key``. First, let's make the key:
+```c
+/* file: items/mysterious_key.c */
+inherit KEY;
+
+void setup()
+{
+  set_id("key");
+  set_adj("small", "brass", "mysterious");
+
+  set_in_room_desc("A small brass key has been left here.");
+
+  set_long(
+    "This is a small brass key. A question mark is engraved on its bow."
+  );
+
+  set_key_type("mysterious room key");
+  set_mass(0.1);
+  set_value(25);
+}
+```
+
+
+Then update Joe to actually sell it:
+```c
+/* file: chars/joe.c */
+set_sell(([
+  "^std/weapon/sword"               : 3,
+  __DIR__ "../items/mysterious_key" : 1,
+]));
+```
+
+
 ### Dysfunctional Behavior
 ```
 ```

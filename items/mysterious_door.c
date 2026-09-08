@@ -14,6 +14,7 @@ void setup(string direction, string destination)
 	set_door_direction(direction);
 	set_door_destination(destination);
 	set_closed(1);
+	set_locked("mysterious room key");
 
 	set_flag(ATTACHED);
 
