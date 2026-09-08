@@ -2,6 +2,7 @@
 inherit ADVERSARY;
 inherit M_VENDOR;
 inherit M_ACTIONS;
+inherit M_TRIGGERS;
 
 void setup()
 {
@@ -31,6 +32,25 @@ void setup()
 			"say Good prices on all my stuff!",
 			"say Satisfaction guaranteed, or I'll kill you!",
 		})
+	);
+
+	add_pattern(
+	  "%s says: %s.",
+	  (: $2 ? $2 : 0 :),
+	  0,
+	  "joe_speech"
+	);
+
+	add_sub_pattern(
+	  "joe_speech",
+	  "%sslicey%s",
+	  "say Don't you mention my cousin!"
+	);
+
+	add_sub_pattern(
+	  "joe_speech",
+	  "%spete%s",
+	  "say Don't you mention my cousin!"
 	);
 
 	set_currency_type("gold");

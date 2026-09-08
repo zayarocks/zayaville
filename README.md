@@ -462,28 +462,40 @@ void setup(string direction, string destination)
   set_sibling_ident("zayaville mysterious door");
   set_door_direction(direction);
   set_door_destination(destination);
-  set_closed(1);
 
   set_flag(ATTACHED);
+}
+
+varargs void on_clone(mixed args...)
+{
+  ::on_clone(args...);
+
+  set_closed(1);
+  set_locked("mysterious room key");
+}
+
+int query_hidden()
+{
+  return 0;
 }
 ```
 
 Now let's add a mysterious door to our mysterious room. Remove the north exit from ``rooms/market_northwest.c`` and add the new door item instead.
-```
+```c
 set_objects(([
   "../items/mysterious_door" : ({ "north", "mysterious_room" }),
 ]));
 ```
 
 Here's the door code to add to ``mysterious_room``. It replaces the ``set_exits`` function.
-```
+```c
 set_objects(([
   "../items/mysterious_door" : ({ "south", "market_northwest" }),
 ]));
 ```
 
 Now we can add our shop, Stabby Joe's Emporium of Wonder. Don't worry, we'll make the shopkeeper next. 
-```
+```c
 /* file: rooms/stabby_joe.c */
 inherit INDOOR_ROOM;
 
@@ -525,6 +537,7 @@ Here's the shopkeeper, Joe:
 inherit ADVERSARY;
 inherit M_VENDOR;
 inherit M_ACTIONS;
+inherit M_TRIGGERS;
 
 void setup()
 {
@@ -555,6 +568,25 @@ void setup()
       "say Satisfaction guaranteed, or I'll kill you!",
     })
   );
+
+  add_pattern(
+	  "%s says: %s.",
+	  (: $2 ? $2 : 0 :),
+	  0,
+	  "joe_speech"
+	);
+
+	add_sub_pattern(
+	  "joe_speech",
+	  "%sslicey%s",
+	  "say Don't you mention my cousin!"
+	);
+
+	add_sub_pattern(
+	  "joe_speech",
+	  "%spete%s",
+	  "say Don't you mention my cousin!"
+	);
 
   set_currency_type("gold");
   set_for_sale(1);
@@ -619,6 +651,7 @@ unlock door with key
 open door
 north
 ```
+
 
 
 ### Dysfunctional Behavior
